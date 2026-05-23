@@ -9,4 +9,12 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        apps: resolve(__dirname, 'apps.html'),
+      },
+    },
+  },
 })
