@@ -20,6 +20,7 @@
       </a>
 
       <!-- Center title -->
+      <span class="apps-nav__logo-text">鹞枫</span>
       <span class="apps-nav__title">应用中心</span>
 
       <!-- Right actions -->
@@ -102,7 +103,7 @@
 
         <div class="app-card__footer">
           <!-- 【将下方 href 替换为你的 Cloudreve 地址】 -->
-          <a href="https://your-cloudreve-url.example.com" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #f97316, #fbbf24);">
+          <a href="http://storage.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #f97316, #fbbf24);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="app-card__btn-icon">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/>
@@ -151,7 +152,7 @@
 
         <div class="app-card__footer">
           <!-- 【将下方 href 替换为你的 Screego 地址】 -->
-          <a href="https://your-screego-url.example.com" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #2563eb, #06b6d4);">
+          <a href="http://screego.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #2563eb, #06b6d4);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="app-card__btn-icon">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/>
@@ -200,7 +201,7 @@
 
         <div class="app-card__footer">
           <!-- 【将下方 href 替换为你的 Jellyfin 地址】 -->
-          <a href="https://your-jellyfin-url.example.com" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #7c3aed, #ec4899);">
+          <a href="http://jellyfin.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #7c3aed, #ec4899);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="app-card__btn-icon">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/>
@@ -361,7 +362,12 @@ onUnmounted(() => {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 .apps-nav__logo:hover { transform: scale(1.08); }
-.apps-nav__logo-text { font-size: 0.9rem; font-weight: 700; color: #fff; letter-spacing: 0.05em; }
+.apps-nav__logo-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
 
 .apps-nav__title {
   font-size: 1rem;

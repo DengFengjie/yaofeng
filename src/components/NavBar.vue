@@ -5,6 +5,7 @@
       <a href="#hero" class="navbar__logo">
         <img src="/logo.svg" alt="logo" />
       </a>
+      <span class="navbar__logo-text">鹞枫</span>
 
       <!-- Desktop Nav Links -->
       <ul class="navbar__links">
@@ -91,6 +92,7 @@ const navLinks = [
   { href: '#interests', zh: '爱好' },
   { href: '#platforms', zh: '开发' },
   { href: '#social',    zh: '社交' },
+  { href: 'apps',      zh: '应用' },
 ]
 
 const themeLabel = computed(() => {
@@ -158,7 +160,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .navbar__logo-text {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   letter-spacing: 0.05em;
 }
 
