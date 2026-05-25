@@ -1,9 +1,9 @@
 /**
- * Enhanced cursor-follow particle effect.
- * - More particle types: orb, sparkle, ring, star, heart
- * - Larger and longer-lasting trail
- * - Rich rainbow / pastel colour palette
- * - Click burst effect
+ * Custom cursor + cursor-follow particle effect.
+ * - Draws a themed cursor cursor: dark→neon crosshair, light→sparkle star
+ * - Hides the system cursor globally
+ * - Particle trail types: orb, sparkle, ring, star
+ * - Click burst
  */
 
 type ParticleType = 'orb' | 'sparkle' | 'ring' | 'star'
@@ -28,6 +28,14 @@ interface CursorState {
   prevX: number
   prevY: number
   speed: number
+  frame: number
+}
+
+function getIsDark(): boolean {
+  const html = document.documentElement
+  return html.getAttribute('data-theme') === 'dark' ||
+    (!html.getAttribute('data-theme') &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
 }
 
 export function useCursorEffect() {
@@ -35,45 +43,177 @@ export function useCursorEffect() {
   let ctx: CanvasRenderingContext2D | null = null
   let rafId = 0
   let particles: Particle[] = []
-  let cursor: CursorState = { x: -999, y: -999, prevX: -999, prevY: -999, speed: 0 }
+  let cursor: CursorState = { x: -999, y: -999, prevX: -999, prevY: -999, speed: 0, frame: 0 }
+  let cursorStyleEl: HTMLStyleElement | null = null
 
   // ── Theme-distinct colour palette ──
-  // Dark mode → vibrant, neon-like hues (high sat & light)
-  // Light mode → soft, pastel hues (medium sat & light)
   function getThemeColors(): { hue: number; sat: number; light: number } {
-    const html = document.documentElement
-    const isDark = html.getAttribute('data-theme') === 'dark' ||
-      (!html.getAttribute('data-theme') &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-
+    const isDark = getIsDark()
     if (isDark) {
-      // 3 vibrant / neon colours
       const pools = [
-        { hue: 260 + Math.random() * 60, sat: 85 + Math.random() * 15, light: 65 + Math.random() * 25 }, // purple-magenta
-        { hue: 180 + Math.random() * 50, sat: 80 + Math.random() * 20, light: 55 + Math.random() * 25 }, // cyan-teal
-        { hue: 340 + Math.random() * 50, sat: 85 + Math.random() * 15, light: 60 + Math.random() * 25 }, // pink-red
+        { hue: 260 + Math.random() * 60, sat: 85 + Math.random() * 15, light: 65 + Math.random() * 25 },
+        { hue: 180 + Math.random() * 50, sat: 80 + Math.random() * 20, light: 55 + Math.random() * 25 },
+        { hue: 340 + Math.random() * 50, sat: 85 + Math.random() * 15, light: 60 + Math.random() * 25 },
       ]
       return pools[Math.floor(Math.random() * pools.length)]
     } else {
-      // 3 soft pastel colours
       const pools = [
-        { hue: 220 + Math.random() * 60, sat: 40 + Math.random() * 25, light: 60 + Math.random() * 25 }, // lavender-blue
-        { hue: 330 + Math.random() * 40, sat: 40 + Math.random() * 25, light: 60 + Math.random() * 25 }, // rose
-        { hue: 30 + Math.random() * 40, sat: 40 + Math.random() * 25, light: 60 + Math.random() * 25 },  // peach-gold
+        { hue: 220 + Math.random() * 60, sat: 40 + Math.random() * 25, light: 60 + Math.random() * 25 },
+        { hue: 330 + Math.random() * 40, sat: 40 + Math.random() * 25, light: 60 + Math.random() * 25 },
+        { hue: 30 + Math.random() * 40, sat: 40 + Math.random() * 25, light: 60 + Math.random() * 25 },
       ]
       return pools[Math.floor(Math.random() * pools.length)]
     }
+  }
+
+  /** Draw the custom cursor at (x, y) */
+  function drawCursor(x: number, y: number) {
+    const c = ctx
+    if (!c) return
+    const isDark = getIsDark()
+
+    c.save()
+    c.translate(x, y)
+
+    if (isDark) {
+      // ── Dark mode: Cyan square + corner dots + white core ──
+      const pulse = 1 + Math.sin(cursor.frame * 0.05) * 0.12
+      const side = 20 * pulse
+      const half = side / 2
+
+      // Outer glow halo
+      const halo = c.createRadialGradient(0, 0, 0, 0, 0, side * 1.4)
+      halo.addColorStop(0, 'rgba(0,255,255,0.18)')
+      halo.addColorStop(0.5, 'rgba(0,180,255,0.08)')
+      halo.addColorStop(1, 'transparent')
+      c.fillStyle = halo
+      c.beginPath()
+      c.arc(0, 0, side * 1.4, 0, Math.PI * 2)
+      c.fill()
+
+      // Outer square
+      c.shadowColor = 'rgba(0,255,255,0.9)'
+      c.shadowBlur = 15
+      c.strokeStyle = 'rgba(0,240,255,0.95)'
+      c.lineWidth = 2.5
+      c.strokeRect(-half, -half, side, side)
+
+      // Inner square
+      const insetHalf = half * 0.65
+      c.shadowColor = 'rgba(0,200,255,0.6)'
+      c.shadowBlur = 15
+      c.strokeStyle = 'rgba(0,220,255,0.5)'
+      c.lineWidth = 1.2
+      c.strokeRect(-insetHalf, -insetHalf, insetHalf * 2, insetHalf * 2)
+
+      // Corner dots
+      c.shadowBlur = 0
+      c.shadowColor = 'rgba(0,255,255,0.9)'
+      c.shadowBlur = 10
+      c.fillStyle = '#fff'
+      const cornerOff = half
+      for (const [sx, sy] of [[-1,-1],[1,-1],[1,1],[-1,1]]) {
+        c.beginPath()
+        c.arc(sx * cornerOff, sy * cornerOff, 2.5, 0, Math.PI * 2)
+        c.fill()
+      }
+
+      // Core glow dot
+      c.shadowBlur = 0
+      const coreR = 6
+      const core = c.createRadialGradient(0, 0, 0, 0, 0, coreR)
+      core.addColorStop(0, '#fff')
+      core.addColorStop(0.3, 'rgba(200,255,255,0.95)')
+      core.addColorStop(0.5, 'rgba(0,220,255,0.7)')
+      core.addColorStop(1, 'transparent')
+      c.fillStyle = core
+      c.beginPath()
+      c.arc(0, 0, coreR, 0, Math.PI * 2)
+      c.fill()
+
+      // Bright white center pin
+      c.fillStyle = '#fff'
+      c.shadowColor = 'rgba(255,255,255,0.9)'
+      c.shadowBlur = 8
+      c.beginPath()
+      c.arc(0, 0, 2.5, 0, Math.PI * 2)
+      c.fill()
+    } else {
+      // ── Light mode: Vibrant coral/pink star ──
+      const pulse = 1 + Math.sin(cursor.frame * 0.06) * 0.12
+      const s = 12 * pulse
+      const coreR = 5
+
+      // Outer glow
+      const glow = c.createRadialGradient(0, 0, 0, 0, 0, s * 3)
+      glow.addColorStop(0, 'rgba(255,80,120,0.20)')
+      glow.addColorStop(0.5, 'rgba(255,80,120,0.08)')
+      glow.addColorStop(1, 'transparent')
+      c.fillStyle = glow
+      c.beginPath()
+      c.arc(0, 0, s * 3, 0, Math.PI * 2)
+      c.fill()
+
+      // 4-point sparkle
+      c.shadowColor = 'rgba(255,60,100,0.7)'
+      c.shadowBlur = 15
+      c.fillStyle = '#ff4477'
+      c.beginPath()
+      for (let i = 0; i < 4; i++) {
+        const a = (i / 4) * Math.PI * 2 - Math.PI / 2
+        c.lineTo(Math.cos(a) * s, Math.sin(a) * s)
+        const a2 = a + Math.PI / 4
+        c.lineTo(Math.cos(a2) * s * 0.25, Math.sin(a2) * s * 0.25)
+      }
+      c.closePath()
+      c.fill()
+
+      // Second sparkle layer — rotated, smaller, paler
+      c.shadowBlur = 10
+      c.fillStyle = '#ff88aa'
+      c.globalAlpha = 0.5
+      c.beginPath()
+      for (let i = 0; i < 4; i++) {
+        const a = (i / 4) * Math.PI * 2
+        c.lineTo(Math.cos(a) * s * 0.5, Math.sin(a) * s * 0.5)
+        const a2 = a + Math.PI / 4
+        c.lineTo(Math.cos(a2) * s * 0.15, Math.sin(a2) * s * 0.15)
+      }
+      c.closePath()
+      c.fill()
+      c.globalAlpha = 1
+
+      // White core glow
+      c.shadowBlur = 0
+      const core = c.createRadialGradient(0, 0, 0, 0, 0, coreR)
+      core.addColorStop(0, '#fff')
+      core.addColorStop(0.4, 'rgba(255,220,230,0.95)')
+      core.addColorStop(1, 'transparent')
+      c.fillStyle = core
+      c.beginPath()
+      c.arc(0, 0, coreR, 0, Math.PI * 2)
+      c.fill()
+
+      // Bright white center
+      c.fillStyle = '#fff'
+      c.shadowColor = 'rgba(255,255,255,0.8)'
+      c.shadowBlur = 6
+      c.beginPath()
+      c.arc(0, 0, 2.5, 0, Math.PI * 2)
+      c.fill()
+    }
+
+    c.restore()
   }
 
   function spawnParticles(x: number, y: number, count: number) {
     const colors = getThemeColors()
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2
-      const speed = 0.3 + Math.random() * 1.5  // wider speed range
-      const life = 50 + Math.random() * 80      // longer life: max ~130 frames
-      const size = 2 + Math.random() * 5         // larger size: 2-7px
+      const speed = 0.3 + Math.random() * 1.5
+      const life = 50 + Math.random() * 80
+      const size = 2 + Math.random() * 5
 
-      // Random type selection — orb ~20%, sparkle ~30%, ring ~25%, star ~25%
       const roll = Math.random()
       let type: ParticleType
       if (roll < 0.20) type = 'orb'
@@ -82,8 +222,7 @@ export function useCursorEffect() {
       else type = 'star'
 
       particles.push({
-        x,
-        y,
+        x, y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         life,
@@ -97,16 +236,14 @@ export function useCursorEffect() {
     }
   }
 
-  /** Burst of particles on click — longer duration */
   function spawnClickBurst(x: number, y: number) {
-    const count = 25 + Math.floor(Math.random() * 20) // 25-44 particles
+    const count = 25 + Math.floor(Math.random() * 20)
     for (let i = 0; i < count; i++) {
       const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.4
       const speed = 1 + Math.random() * 2.5
-      const life = 60 + Math.random() * 70     // longer: 60-130 frames
+      const life = 60 + Math.random() * 70
       const colors = getThemeColors()
 
-      // Click burst: mostly stars and sparkles, fewer orbs
       const roll = Math.random()
       let type: ParticleType
       if (roll < 0.45) type = 'star'
@@ -132,7 +269,7 @@ export function useCursorEffect() {
   function drawParticle(p: Particle) {
     if (!ctx) return
     const progress = p.life / p.maxLife
-    const alpha = progress * progress // fade out quadratically
+    const alpha = progress * progress
     const scale = 0.2 + 0.8 * progress
 
     ctx.save()
@@ -144,7 +281,6 @@ export function useCursorEffect() {
     const brightColor = `hsl(${p.hue}, ${p.saturation}%, ${Math.min(p.lightness + 20, 100)}%)`
 
     if (p.type === 'sparkle') {
-      // 4-point star
       const s = p.size * 0.7
       ctx.fillStyle = brightColor
       ctx.beginPath()
@@ -156,13 +292,11 @@ export function useCursorEffect() {
       }
       ctx.closePath()
       ctx.fill()
-      // White core
       ctx.fillStyle = 'rgba(255,255,255,0.85)'
       ctx.beginPath()
       ctx.arc(0, 0, s * 0.12, 0, Math.PI * 2)
       ctx.fill()
     } else if (p.type === 'ring') {
-      // Expanding hollow ring
       ctx.strokeStyle = color
       ctx.lineWidth = Math.max(0.6, p.size * 0.3)
       ctx.globalAlpha = alpha * 0.55
@@ -170,7 +304,6 @@ export function useCursorEffect() {
       ctx.arc(0, 0, p.size * 1.4 * (1 - progress * 0.4), 0, Math.PI * 2)
       ctx.stroke()
     } else if (p.type === 'star') {
-      // 5-point star
       const s = p.size * 0.6
       ctx.fillStyle = brightColor
       ctx.beginPath()
@@ -182,13 +315,11 @@ export function useCursorEffect() {
       }
       ctx.closePath()
       ctx.fill()
-      // Glow
       ctx.fillStyle = 'rgba(255,255,255,0.5)'
       ctx.beginPath()
       ctx.arc(0, 0, s * 0.15, 0, Math.PI * 2)
       ctx.fill()
     } else {
-      // Glowing orb
       const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size * 1.8)
       gradient.addColorStop(0, 'rgba(255,255,255,0.95)')
       gradient.addColorStop(0.25, brightColor)
@@ -206,7 +337,7 @@ export function useCursorEffect() {
   function tick() {
     if (!ctx || !canvas) return
 
-    // Full clear — never leaves artifacts
+    cursor.frame++
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     // Spawn new particles based on movement
@@ -216,7 +347,6 @@ export function useCursorEffect() {
 
     if (dist > 2 && cursor.x > 0 && cursor.y > 0) {
       cursor.speed = Math.min(dist * 0.12, 7)
-      // More particles on faster movement
       const count = Math.min(Math.floor(dist * 0.35) + 1, 8)
       spawnParticles(cursor.x, cursor.y, count)
     } else {
@@ -239,13 +369,17 @@ export function useCursorEffect() {
         particles.splice(i, 1)
         continue
       }
-
       drawParticle(p)
     }
 
-    // Cap particles — higher limit for richer effect
+    // Cap particles
     if (particles.length > 500) {
       particles.splice(0, particles.length - 500)
+    }
+
+    // Draw custom cursor on top (always visible)
+    if (cursor.x > 0 && cursor.y > 0) {
+      drawCursor(cursor.x, cursor.y)
     }
 
     rafId = requestAnimationFrame(tick)
@@ -279,8 +413,24 @@ export function useCursorEffect() {
     canvas.height = window.innerHeight
   }
 
+  function hideSystemCursor() {
+    if (cursorStyleEl) return
+    cursorStyleEl = document.createElement('style')
+    cursorStyleEl.textContent = 'html, body, * { cursor: none !important; }'
+    document.head.appendChild(cursorStyleEl)
+  }
+
+  function restoreSystemCursor() {
+    if (cursorStyleEl) {
+      cursorStyleEl.remove()
+      cursorStyleEl = null
+    }
+  }
+
   function init() {
     if (canvas) return
+
+    hideSystemCursor()
 
     canvas = document.createElement('canvas')
     canvas.id = 'cursor-effect-canvas'
@@ -304,6 +454,7 @@ export function useCursorEffect() {
   }
 
   function destroy() {
+    restoreSystemCursor()
     cancelAnimationFrame(rafId)
     window.removeEventListener('resize', resize)
     window.removeEventListener('pointermove', onPointerMove)
