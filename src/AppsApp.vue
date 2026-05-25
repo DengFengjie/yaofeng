@@ -60,7 +60,7 @@
     <section class="apps-hero reveal">
       <div class="apps-hero__badge">
         <span class="apps-hero__badge-dot" />
-        <span>所有功能依赖计费流量正常运行</span>
+        <span>当前网络：腾讯云CVM-南京</span>
       </div>
       <h1 class="apps-hero__title">应用中心</h1>
       <p class="apps-hero__sub">
