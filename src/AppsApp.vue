@@ -103,7 +103,7 @@
 
         <div class="app-card__footer">
           <!-- 【将下方 href 替换为你的 Cloudreve 地址】 -->
-          <a href="http://storage.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #f97316, #fbbf24);">
+          <a href="http://cloudreve.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #f97316, #fbbf24);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="app-card__btn-icon">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/>
