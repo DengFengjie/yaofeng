@@ -6,19 +6,19 @@ import { useTheme } from './useTheme'
 // 将图片放入对应文件夹后，在此处添加文件名即可
 // =====================================================
 const LIGHT_WALLPAPERS: string[] = [
-  '/assets/wallpapers/light/1.png',
-  '/assets/wallpapers/light/2.png',
-  '/assets/wallpapers/light/3.png',
-  '/assets/wallpapers/light/4.png',
-  '/assets/wallpapers/light/5.png',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/ChihayaAnon_light.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/KanameRana_light.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/NagasakiSoyo_light.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/ShiinaTaki_light.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/TakamatsuTomori_light.jpg',
 ]
 
 const DARK_WALLPAPERS: string[] = [
-  '/assets/wallpapers/dark/1.png',
-  '/assets/wallpapers/dark/2.png',
-  '/assets/wallpapers/dark/3.png',
-  '/assets/wallpapers/dark/4.png',
-  '/assets/wallpapers/dark/5.png',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/ChihayaAnon_dark.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/KanameRana_dark.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/NagasakiSoyo_dark.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/ShiinaTaki_dark.jpg',
+  'https://cos.yaofeng.xyz/imagebed/homepagewallpaper/TakamatsuTomori_dark.jpg',
 ]
 
 // =====================================================
