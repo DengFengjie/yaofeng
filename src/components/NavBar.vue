@@ -2,7 +2,7 @@
   <nav class="navbar" :class="{ 'navbar--scrolled': isScrolled }">
     <div class="navbar__inner">
       <!-- Logo / Name -->
-      <a href="#hero" class="navbar__logo">
+      <a href="/apps" class="navbar__logo">
         <img src="/logo.svg" alt="logo" />
       </a>
       <span class="navbar__logo-text">鹞枫</span>
@@ -92,7 +92,7 @@ const navLinks = [
   { href: '#interests', zh: '爱好' },
   { href: '#platforms', zh: '开发' },
   { href: '#social',    zh: '社交' },
-  { href: 'apps',      zh: '应用' },
+  // { href: 'apps',      zh: '应用' },
 ]
 
 const themeLabel = computed(() => {
