@@ -43,10 +43,24 @@
 
       <!-- Bottom row -->
       <div class="footer__bottom">
-        <p class="footer__copyright">
-          © {{ currentYear }} 邓冯杰. 保留所有权利。
-          <!-- 【替换为你的名字】 -->
-        </p>
+        <div class="footer__left">
+          <p class="footer__copyright">
+            © {{ currentYear }} 邓冯杰. 保留所有权利。
+            <!-- 【替换为你的名字】 -->
+          </p>
+          <!-- ICP备案 & 公安备案（放在所有权正下方） -->
+          <div class="footer__beian">
+            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="footer__beian-link">
+              <!-- 【替换为你的ICP备案号】 -->
+              鄂ICP备 2024078218号-1
+            </a>
+            <span class="footer__beian-separator">|</span>
+            <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener noreferrer" class="footer__beian-link">
+              <!-- 【替换为你的公安备案号】 -->
+              鄂公网安备 XXXXXXXXXXXX号
+            </a>
+          </div>
+        </div>
         <p class="footer__built-with">
           使用
           <span class="footer__tech-badge">Vue 3</span>
@@ -199,9 +213,48 @@ const navLinks = [
   gap: 12px;
 }
 
+/* 左侧：所有权 + 备案号 */
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .footer__copyright {
   font-size: 0.78rem;
   color: var(--text-muted);
+}
+
+/* ICP备案 & 公安备案 */
+.footer__beian {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__beian-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: #000;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer__beian-link:hover {
+  color: var(--accent-primary);
+}
+
+.footer__beian-icon {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+}
+
+.footer__beian-separator {
+  font-size: 0.78rem;
+  color: #000;
 }
 
 .footer__built-with {
