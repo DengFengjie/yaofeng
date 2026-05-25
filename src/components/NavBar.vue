@@ -2,7 +2,7 @@
   <nav class="navbar" :class="{ 'navbar--scrolled': isScrolled }">
     <div class="navbar__inner">
       <!-- Logo / Name -->
-      <a href="/apps" class="navbar__logo">
+      <a href="/apps.html" class="navbar__logo">
         <img src="/logo.svg" alt="logo" />
       </a>
       <span class="navbar__logo-text">鹞枫</span>

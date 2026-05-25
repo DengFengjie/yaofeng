@@ -15,7 +15,7 @@
   <nav class="apps-nav" :class="{ 'apps-nav--scrolled': isScrolled }">
     <div class="apps-nav__inner">
       <!-- Logo -->
-      <a href="/" class="apps-nav__logo">
+      <a href="/index.html" class="apps-nav__logo">
         <img src="/logo.svg" alt="Logo"/>
       </a>
 
