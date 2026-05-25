@@ -72,8 +72,13 @@ import SocialSection from '@/components/SocialSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import { useTheme } from '@/composables/useTheme'
 import { useWallpaper } from '@/composables/useWallpaper'
+import { useCursorEffect } from '@/composables/useCursorEffect'
+
+// Initialize cursor particle trail effect
+const { init: initCursor, destroy: destroyCursor } = useCursorEffect()
 
 // Initialize theme system
+
 useTheme()
 
 // =====================================================
@@ -146,6 +151,9 @@ onMounted(() => {
   // Initialize wallpaper (random start + auto-rotate timer)
   initWallpaper()
 
+  // Initialize cursor particle trail effect
+  initCursor()
+
   // Set both layers to the initial wallpaper so there's no flash
   const initial = currentWallpaper.value
   layerA.value = initial
@@ -158,7 +166,9 @@ onMounted(() => {
 
 onUnmounted(() => {
   revealObserver?.disconnect()
+  destroyCursor()
 })
+
 </script>
 
 <style>

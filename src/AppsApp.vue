@@ -278,8 +278,13 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useTheme } from '@/composables/useTheme'
 import { useWallpaper } from '@/composables/useWallpaper'
+import { useCursorEffect } from '@/composables/useCursorEffect'
+
+// Initialize cursor particle trail effect
+const { init: initCursor, destroy: destroyCursor } = useCursorEffect()
 
 const { currentTheme, resolvedTheme, toggleTheme } = useTheme()
+
 const {
   currentWallpaper,
   currentIndex,
@@ -313,13 +318,16 @@ function initReveal() {
 
 onMounted(() => {
   initWallpaper()
+  initCursor()
   window.addEventListener('scroll', onScroll, { passive: true })
   setTimeout(initReveal, 100)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  destroyCursor()
 })
+
 </script>
 
 <style scoped>
