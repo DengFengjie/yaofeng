@@ -76,7 +76,7 @@
         <div class="app-card__banner" style="background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);">
           <div class="app-card__icon-wrap">
             <!-- Cloudreve logo: cloud + arrow up -->
-            <img src="/assets/apps/cloudreve.svg" alt="Cloudreve" class="app-card__icon">
+            <img src="/assets/apps/cloudreve.png" alt="Cloudreve" class="app-card__icon">
           </div>
           <div class="app-card__banner-text">
             <h2 class="app-card__name">Cloudreve</h2>
@@ -125,7 +125,7 @@
         <div class="app-card__banner" style="background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);">
           <div class="app-card__icon-wrap">
             <!-- Screego logo: screen share -->
-            <img src="/assets/apps/screego.svg" alt="Screego" class="app-card__icon">
+            <img src="/assets/apps/screego.png" alt="Screego" class="app-card__icon">
           </div>
           <div class="app-card__banner-text">
             <h2 class="app-card__name">Screego</h2>
@@ -174,7 +174,7 @@
         <div class="app-card__banner" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 60%, #ec4899 100%);">
           <div class="app-card__icon-wrap">
             <!-- Jellyfin logo: stylized J / play button -->
-            <img src="/assets/apps/jellyfin.svg" alt="Jellyfin" class="app-card__icon">
+            <img src="/assets/apps/jellyfin.png" alt="Jellyfin" class="app-card__icon">
           </div>
           <div class="app-card__banner-text">
             <h2 class="app-card__name">Jellyfin</h2>
@@ -201,7 +201,7 @@
 
         <div class="app-card__footer">
           <!-- 【将下方 href 替换为你的 Jellyfin 地址】 -->
-          <a href="http://jellyfin.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #7c3aed, #ec4899);">
+          <a href="https://jellyfin.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #7c3aed, #ec4899);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="app-card__btn-icon">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/>
@@ -214,6 +214,55 @@
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
             </svg>
             <a href="https://github.com/jellyfin/jellyfin" target="_blank" rel="noopener noreferrer" class="app-card__meta-link">开源项目</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Lsky Pro ── -->
+      <div class="app-card glass-card reveal reveal-delay-1">
+        <div class="app-card__banner" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #14b8a6 100%);">
+          <div class="app-card__icon-wrap">
+            <!-- Lsky Pro logo: image/photo -->
+            <img src="/assets/apps/lsky-pro.png" alt="Lsky Pro" class="app-card__icon">
+          </div>
+          <div class="app-card__banner-text">
+            <h2 class="app-card__name">Lsky Pro</h2>
+            <span class="app-card__version">兰空图床</span>
+          </div>
+          <div class="app-card__status">
+            <span class="status-dot status-dot--online" />
+            <span>运行中</span>
+          </div>
+        </div>
+
+        <div class="app-card__body">
+          <p class="app-card__desc">
+            优雅的开源图片托管与管理平台，支持本地、腾讯云 COS 等多种存储策略。具备图片压缩、水印、鉴黄、多用户管理及 API 接口等丰富功能。
+          </p>
+          <div class="app-card__tags">
+            <span class="tag">图床</span>
+            <span class="tag">图片管理</span>
+            <span class="tag">多存储策略</span>
+            <span class="tag">API</span>
+            <span class="tag">图片压缩</span>
+          </div>
+        </div>
+
+        <div class="app-card__footer">
+          <!-- 【将下方 href 替换为你的 Lsky Pro 地址】 -->
+          <a href="https://lsky.yaofeng.xyz" target="_blank" rel="noopener noreferrer" class="app-card__btn" style="background: linear-gradient(135deg, #0ea5e9, #14b8a6);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="app-card__btn-icon">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            立即访问
+          </a>
+          <div class="app-card__meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="app-card__meta-icon">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+            <a href="https://github.com/lsky-org/lsky-pro" target="_blank" rel="noopener noreferrer" class="app-card__meta-link">开源项目</a>
           </div>
         </div>
       </div>
