@@ -222,7 +222,7 @@
 
     <!-- Info notice -->
     <div class="apps-notice glass-card reveal reveal-delay-4">
-      <img src="/assets/apps/notice.png" alt="Info" class="apps-notice__icon" />
+      <img src="/assets/apps/icon/notice.png" alt="Info" class="apps-notice__icon" />
       <p>以上服务架设于私人服务器，仅供授权人员使用。如遇访问失败，可能是服务正在维护或网络受限。</p>
     </div>
 
