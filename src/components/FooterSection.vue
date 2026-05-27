@@ -50,14 +50,16 @@
           </p>
           <!-- ICP备案 & 公安备案（放在所有权正下方） -->
           <div class="footer__beian">
+            <img src="/assets/beian/beian-icp.png" alt="ICP备案图标" class="footer__beian-icon" />
             <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="footer__beian-link">
               <!-- 【替换为你的ICP备案号】 -->
               鄂ICP备 2024078218号-1
             </a>
             <span class="footer__beian-separator">|</span>
-            <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener noreferrer" class="footer__beian-link">
+            <img src="/assets/beian/beian-gov.png" alt="GOV备案图标" class="footer__beian-icon" />
+            <a href="https://beian.mps.gov.cn/#/query/webSearch?code=42900402000897" target="_blank" rel="noopener noreferrer" class="footer__beian-link">
               <!-- 【替换为你的公安备案号】 -->
-              鄂公网安备 XXXXXXXXXXXX号
+              鄂公网安备 42900402000897号
             </a>
           </div>
         </div>
@@ -247,8 +249,8 @@ const navLinks = [
 }
 
 .footer__beian-icon {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   vertical-align: middle;
 }
 
