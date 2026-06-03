@@ -64,7 +64,7 @@
       </div>
       <h1 class="apps-hero__title">应用中心</h1>
       <p class="apps-hero__sub">
-        个人服务器自托管应用，点击卡片即可访问。
+        个人服务器自托管应用，点击卡片即可了解或访问。
       </p>
     </section>
 
@@ -272,7 +272,7 @@
     <!-- Info notice -->
     <div class="apps-notice glass-card reveal reveal-delay-4">
       <img src="/assets/apps/icon/notice.png" alt="Info" class="apps-notice__icon" />
-      <p>以上服务架设于私人服务器，仅供授权人员使用。如遇访问失败，可能是服务正在维护或网络受限。</p>
+      <p>以上应用架设于私人服务器，原则上仅供授权人员使用！如遇访问失败，可能是维护更新或网络受限，建议直接联系管理员本人。</p>
     </div>
 
   </main>
@@ -287,7 +287,7 @@
         <div>
           <!-- 【替换为你的名字】 -->
           <p class="apps-footer__name">鹞枫</p>
-          <p class="apps-footer__sub">个人服务器 · 应用中心</p>
+          <p class="apps-footer__sub">云服务器 · 第十三种植园</p>
         </div>
       </div>
       <div class="apps-footer__right">
